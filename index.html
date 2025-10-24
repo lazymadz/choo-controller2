@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choo Controller</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #4facfe, #f093fb);
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .cat-container {
+      position: relative;
+      width: 400px;
+      height: 620px;
+      background: url('cat-phone.png') no-repeat center center / contain;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    h2 {
+      color: white;
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      justify-items: center;
+    }
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    button {
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      height: 65px;
+      width: 65px;
+      background: radial-gradient(circle at top left, #ff9a9e, #fad0c4);
+      box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.2), inset -2px -2px 5px rgba(0, 0, 0, 0.5), 0 5px 10px rgba(0, 0, 0, 0.4);
+      transition: all 0.2s ease;
+    }
+    button:hover { transform: scale(1.05); filter: brightness(1.2); }
+    button:active { transform: scale(0.95); filter: brightness(0.8); }
+    .label {
+      margin-top: 4px;
+      font-size: 0.8rem;
+      color: #fff;
+      text-shadow: 0 0 4px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="cat-container">
+    <h2>Choo Controller</h2>
+    <div class="keypad">
+      <div class="btn-container"><button data-sound="Хочешь есть">🍽️</button><div class="label">Хочешь есть</div></div>
+      <div class="btn-container"><button data-sound="Manger">🍞</button><div class="label">Manger</div></div>
+      <div class="btn-container"><button data-sound="There’s a bug">🐞</button><div class="label">There’s a bug</div></div>
+      <div class="btn-container"><button data-sound="Bravo">👏</button><div class="label">Bravo</div></div>
+      <div class="btn-container"><button data-sound="T’es fou">🤪</button><div class="label">T’es fou</div></div>
+      <div class="btn-container"><button data-sound="Pas beau">😒</button><div class="label">Pas beau</div></div>
+      <div class="btn-container"><button data-sound="Assis">🪑</button><div class="label">Assis</div></div>
+      <div class="btn-container"><button data-sound="Michele">🎤</button><div class="label">Michele</div></div>
+      <div class="btn-container"><button data-sound="Scary vacuum">🌀</button><div class="label">Scary vacuum</div></div>
+    </div>
+  </div>
+  <script>
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const soundName = btn.getAttribute('data-sound');
+        let fileExt = soundName === 'Michele' || soundName === 'Scary vacuum' ? 'wav' : 'm4a';
+        const audio = new Audio(`sounds/${soundName}.${fileExt}`);
+        audio.play().catch(err => console.error('Audio play error:', err));
+      });
+    });
+  </script>
+</body>
+</html>
